@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web 版生辰</title>
+    <style id="clock-animations"></style>
+    <style>
+        .clock-wrapper{
+            position: absolute;
+            top: 20px;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+            padding: 5px;
+            background-image: linear-gradient(#f7f7f7,#e0e0e0);
+            border-radius: 50%;
+            box-shadow: 0 10px 15px rgba(0,0,0,.15),0 2px 2px rgba(0,0,0,.2);
+
+        }
+        .clock-base{
+            width: 250px;
+            height: 250px;
+            background-color: #eee;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #eee;
+        }
+        .click-indicator{
+            position: absolute;
+            z-index: 1;
+            top: 15px;
+            left: 15px;
+            width: 230px;
+            height: 230px;
+        }
+        .click-indicator div{
+            position: absolute;
+            width: 2px;
+            height: 4px;
+            margin: 113px 114px;
+            background-color: #ddd;
+        }
+        .click-indicator div:nth-child(1) {
+            transform: rotate(30deg) translateY(-113px);
+        }
+        .click-indicator div:nth-child(2) {
+            transform: rotate(60deg) translateY(-113px);
+        }
+        .click-indicator div:nth-child(3) {
+            transform: rotate(90deg) translateY(-113px);
+            background-color: #aaa;
+        }
+        .click-indicator div:nth-child(4) {
+            transform: rotate(120deg) translateY(-113px);
+        }
+        .click-indicator div:nth-child(5) {
+            transform: rotate(150deg) translateY(-113px);
+        }
+        .click-indicator div:nth-child(6) {
+            transform: rotate(180deg) translateY(-113px);
+            background-color: #aaa;
+        }
+        .click-indicator div:nth-child(7) {
+            transform: rotate(210deg) translateY(-113px);
+        }
+        .click-indicator div:nth-child(8) {
+            transform: rotate(240deg) translateY(-113px);
+        }
+        .click-indicator div:nth-child(9) {
+            transform: rotate(270deg) translateY(-113px);
+            background-color: #aaa;
+        }
+        .click-indicator div:nth-child(10) {
+            transform: rotate(300deg) translateY(-113px);
+        }
+        .click-indicator div:nth-child(11) {
+            transform: rotate(330deg) translateY(-113px);
+        }
+        .click-indicator div:nth-child(12) {
+            transform: rotate(360deg) translateY(-113px);
+            background-color: #c00;
+        }
+        .clock-hour{
+            position: absolute;
+            z-index: 2;
+            top: 80px;
+            left: 128px;
+            width: 4px;
+            height: 65px;
+            background-color: #555;
+            border-radius: 2px;
+            box-shadow: 0 0 2px rgba(0,0,0,.2);
+            transform-origin: 2px 50px;
+            transition: .5s;
+            -webkit-animation: rotate-hour 43200s linear infinite;
+        }
+        .clock-minute{
+            position: absolute;
+            z-index: 3;
+            top: 60px;
+            left: 128px;
+            width: 4px;
+            height: 85px;
+            background-color: #555;
+            border-radius: 2px;
+            box-shadow: 0 0 2px rgba(0,0,0,.2);
+            transform-origin: 2px 70px;
+            transition: .5s;
+            -webkit-animation: rotate-minute 3600s linear infinite;
+        }
+        .clock-second{
+            position: absolute;
+            z-index: 4;
+            top: 20px;
+            left: 129px;
+            width: 2px;
+            height: 130px;
+            background-color: #a00;
+            box-shadow: 0 0 2px rgba(0,0,0,.2);
+            transform-origin: 1px 110px;
+            transition: .5s;
+            -webkit-animation: rotate-second 60s linear infinite;
+        }
+        .clock-second:after{
+            content: "";
+            display: block;
+            position: absolute;
+            left: -5px;
+            bottom: 14px;
+            width: 8px;
+            height: 8px;
+            background-color: #a00;
+            border: solid 2px #a00;
+            border-radius: 50%;
+            box-shadow: 0 0 3px rgba(0,0,0,.2);
+        }
+        .clock-center{
+            position: absolute;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            top: 55px;
+            left: 55px;
+            background-image: linear-gradient(#e3e3e3,#f7f7f7);
+            border-radius: 50%;
+            box-shadow: inset 0 -1px 0 #fafafa, inset 0 1px 0 #e3e3e3;
+        }
+        .clock-center:after{
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            margin: 65px;
+            background-color: #ddd;
+            border-radius: 50%;
+        }
+        header {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header h1 {
+            font-size: 24px;
+            color: #666;
+        }
+        header #poetry {
+            position: absolute;
+            right: 0;
+            top: 0;
+
+            line-height: 24px;
+
+        }
+        .input {
+            display: block;
+            margin: 300px auto 0;
+            width: 300px;
+        }
+        .input input {
+            width: 200px;
+            height: 40px;
+            line-height: 25px;
+            padding: 0 5px;
+            border-radius: 4px;
+            border: 1px solid #dcdcdc;
+        }
+        .input input:focus {
+            outline: none;
+            border:1px solid #ddd;
+        }
+        .input a {
+            padding: 13px 10px;
+            vertical-align: -1px;
+            background: #43ecc5;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="fuck.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Web 版生辰</h1>
+        <span id="poetry"></span>
+    </header>
+    <main class="container">
+        <section>
+
+            <div class="clock-wrapper">
+                <div class="clock-base">
+                    <div class="click-indicator">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="clock-hour"></div>
+                    <div class="clock-minute"></div>
+                    <div class="clock-second"></div>
+                    <div class="clock-center"></div>
+                </div>
+            </div>
+            <div class="input">
+                <input type="text">
+                <a href="javascript:void(0)" class="btn">查看结果</a>
+            </div>
+        </section>
+        <section class="live-result">
+            <div class="year"></div>
+            <div class="month"></div>
+            <div class="day"></div>
+            <div class="hour"></div>
+            <div class="minute"></div>
+            <div class="seconds"></div>
+            <div class="die">
+                <a href="" class="btn"></a>
+            </div>
+        </section>
+        <section class="die-result">
+            <div class="ml"></div>
+            <div class="weekend"></div>
+            <div class="holiday"></div>
+            <div class="eat"></div>
+        </section>
+    </main>
+    <footer>
+        <span></span>
+    </footer>
+    <script>
+        (function(){
+
+            //generate clock animations
+            var now       = new Date(),
+                hourDeg   = now.getHours() / 12 * 360 + now.getMinutes() / 60 * 30,
+                minuteDeg = now.getMinutes() / 60 * 360 + now.getSeconds() / 60 * 6,
+                secondDeg = now.getSeconds() / 60 * 360,
+                stylesDeg = [
+                    "@-webkit-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
+                    "@-webkit-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
+                    "@-webkit-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}"
+                ].join("");
+
+            document.getElementById("clock-animations").innerHTML = stylesDeg;
+
+        })();
+    </script>
+    <script>
+        window.onload = function(){
+            var btn = document.getElementById("btn");
+            var poem = new Array();
+            poem = ["对酒当歌，人生几何",
+            "「譬如朝露  去日苦多」",
+            "「慨当以慷  忧思难忘」",
+            "「何以解忧  唯有杜康」",
+            "「青青子衿  悠悠我心」",
+            "「但为君故  沉吟至今」",
+            "「呦呦鹿鸣  食野之苹」",
+            "「我有嘉宾  鼓瑟吹笙」",
+            "「明明如月  何时可掇」",
+            "「忧从中来  不可断绝」",
+            "「越陌度阡  枉用相存」",
+            "「契阔谈宴  心念旧恩」",
+            "「月明星稀  乌鹊南飞」",
+            "「绕树三匝  何枝可依」",
+            "「山不厌高  海不厌深」",
+            "「周公吐哺  天下归心」",
+            "「青青园中葵  朝露待日晞」",
+            "「阳春布德泽  万物生光辉」",
+            "「常恐秋节至  焜黄华叶衰」",
+            "「百川东到海  何时复西归」",
+            "「少壮不努力  老大徒伤悲」"];
+
+            var random_num = parseInt(Math.random()*21);
+            document.getElementById("poetry").innerHTML= poem[random_num];
+
+
+            btn.onclick = function(){
+
+                var ul = document.getElementById("JS-ul");
+                ul.style.display = "block";
+                var ul2 = document.getElementById("JS-ul2");
+                ul2.style.display = "block";
+                var time = document.getElementById("inputbox").value;
+                if (!time) {
+                    time = "1988-04-01";
+                }
+
+                var mytime = new Date(time);
+                var timems = mytime.getTime();
+                var now = Date.now();
+                var timelong = now - timems;
+
+                var day = timelong/(24*3600000);
+
+                var year = timelong/(365*86400000);
+                var life_left = 75 - year;
+
+                document.getElementById("thistime0").innerHTML= "已经度过"
+                document.getElementById("thistime1").innerHTML="年："+"<span id=year_num></span>"
+                var yearMove = new CountUp("year_num",0,year,1,2);
+                yearMove.start();
+
+                document.getElementById("thistime2").innerHTML="月："+"<span id=mon_num></span>"
+                var monMove = new CountUp("mon_num",0,year*12,0,3);
+                monMove.start();
+
+                document.getElementById("thistime3").innerHTML="日："+"<span id=day_num></span>"
+                var dayMove = new CountUp("day_num",0,Math.floor(timelong/86400000),0,4);
+                dayMove.start();
+
+                document.getElementById("thistime4").innerHTML="时："+"<span id=hour_num></span>"
+                var hourMove = new CountUp("hour_num",0,Math.floor(timelong/3600000),0,5);
+                hourMove.start();
+
+                document.getElementById("nexttime0").innerHTML= "还可拥有"
+                document.getElementById("nexttime4").innerHTML="吃饭："+"<span id=meal_num></span>"
+                var mealMove = new CountUp("meal_num",0,life_left*365*3,0,5);
+                mealMove.start();
+
+                document.getElementById("nexttime1").innerHTML="长假："+"<span id=voc_num></span>"
+                var vocMove = new CountUp("voc_num",0,life_left*3,0,2);
+                vocMove.start();
+
+                document.getElementById("nexttime3").innerHTML="做爱："+"<span id=ml_num></span>"
+                var mlMove = new CountUp("ml_num",0,life_left*56,0,3);
+                mlMove.start();
+
+                document.getElementById("nexttime2").innerHTML="周末："+"<span id=week_num></span>"
+                var weekMove = new CountUp("week_num",0,life_left*53,0,3);
+                weekMove.start();
+
+                // document.getElementById("thistime3").innerHTML="分："+Math.floor(timelong/60000);
+                // document.getElementById("thistime4").innerHTML="小时："+Math.floor(timelong/3600000);
+                // document.getElementById("thistime5").innerHTML="天："+Math.floor(timelong/86400000);
+                // document.getElementById("thistime6").innerHTML="周："+Math.floor(timelong/604800000);
+                // document.getElementById("thistime7").innerHTML="月："+Math.floor(year*12);
+
+                // setInterval(function() {
+                //  var now = Date.now();
+                //  var timelong = now - timems;
+                //  var year = timelong/(365*86400000);
+                //  document.getElementById("thistime8").innerHTML="年："+year;
+                // },1000)
+
+                // var oldtime = now;
+                // var demo1 = new CountUp("thistime1", 0, oldtime, 0, 5);
+                // demo1.start();
+                // setInterval(function() {
+                //  var newtime = Date.now();
+                //  var demo1 = new CountUp("thistime1", 0, newtime, 0, 5000);
+                //  demo1.start();
+                //  oldtime = newtime;
+                // },10000000);
+            //var demo = new CountUp("thistime5", 0, day, 0, 1);
+            //demo.start();
+
+            }
+        }
+    </script>
+    <script>
+        $(function() {
+
+        })
+    </script>
+</body>
+</html>
