@@ -241,6 +241,7 @@
             </div>
         </section>
         <section class="live-result" style="display: none;">
+            <h4>已经度过</h4>
             <div class="year"></div>
             <div class="month"></div>
             <div class="day"></div>
@@ -248,14 +249,18 @@
             <div class="minute"></div>
             <div class="seconds"></div>
             <div class="die">
-                <a href="" class="btn"></a>
+                <a href="" class="btn"> 死之钟</a>
             </div>
         </section>
         <section class="die-result" style="display:none;">
+        <h4>还可拥有</h4>
             <div class="ml"></div>
             <div class="weekend"></div>
             <div class="holiday"></div>
             <div class="eat"></div>
+            <div class="live">
+                <a href="" class="btn">生之时</a>
+            </div>
         </section>
     </main>
     <footer>
@@ -523,119 +528,63 @@
                 "「常恐秋节至  焜黄华叶衰」",
                 "「百川东到海  何时复西归」",
                 "「少壮不努力  老大徒伤悲」"];
-891
-        })
-        window.onload = function(){
-            var btn = document.getElementById("btn");
-            var poem = new Array();
-            poem = ["对酒当歌，人生几何",
-            "「譬如朝露  去日苦多」",
-            "「慨当以慷  忧思难忘」",
-            "「何以解忧  唯有杜康」",
-            "「青青子衿  悠悠我心」",
-            "「但为君故  沉吟至今」",
-            "「呦呦鹿鸣  食野之苹」",
-            "「我有嘉宾  鼓瑟吹笙」",
-            "「明明如月  何时可掇」",
-            "「忧从中来  不可断绝」",
-            "「越陌度阡  枉用相存」",
-            "「契阔谈宴  心念旧恩」",
-            "「月明星稀  乌鹊南飞」",
-            "「绕树三匝  何枝可依」",
-            "「山不厌高  海不厌深」",
-            "「周公吐哺  天下归心」",
-            "「青青园中葵  朝露待日晞」",
-            "「阳春布德泽  万物生光辉」",
-            "「常恐秋节至  焜黄华叶衰」",
-            "「百川东到海  何时复西归」",
-            "「少壮不努力  老大徒伤悲」"];
-
-            var random_num = parseInt(Math.random()*21);
-            document.getElementById("poetry").innerHTML= poem[random_num];
+            var random = parseInt(Math.random()*21);
+            $('#poetry').html(poem[random]);
 
 
-            btn.onclick = function(){
 
-                var live = document.querySelector(".live-result");
-                live.style.display = "block";
-                var die = document.querySelector(".die-result");
-                die.style.display = "block";
-                var time = document.getElementById("iptVal").value;
-                if (!time) {
-                    time = "1988-04-01";
+            var $btn = $('#btn'),
+                $live = $('.live-result'),
+                $die = $('.die-result');
+            $btn.on('click',function() {
+                var
+                    $time = $('#iptVal').val(),
+                    myTime = new Date($time),
+                    times = myTime.getTime(),
+                    now = Date.now(),
+                    timelong = now-times,
+                    year = timelong/(365*86400000),
+                    day = timelong/(24*3600000),
+                    lifeLeft = 75 - year;
+                $live.show();
+                $die.show();
+                if (!$time) {
+                    $time = '1998-04-01';
                 }
-
-                var mytime = new Date(time);
-                var timems = mytime.getTime();
-                var now = Date.now();
-                var timelong = now - timems;
-
-                var day = timelong/(24*3600000);
-
-                var year = timelong/(365*86400000);
-                var life_left = 75 - year;
-
-                document.getElementById("thistime0").innerHTML= "已经度过"
-                document.getElementById("thistime1").innerHTML="年："+"<span id=year_num></span>"
-                var yearMove = new CountUp("year_num",0,year,1,2);
+                $('.year').html('<span id=yearNum></span>'+'年');
+                var yearMove = new CountUp("yearNum",0,year,1,2);
                 yearMove.start();
 
-                document.getElementById("thistime2").innerHTML="月："+"<span id=mon_num></span>"
-                var monMove = new CountUp("mon_num",0,year*12,0,3);
+                $('.month').html('<span id=monNum></span>'+'月');
+                var monMove = new CountUp("monNum",0,year*12,0,3);
                 monMove.start();
 
-                document.getElementById("thistime3").innerHTML="日："+"<span id=day_num></span>"
-                var dayMove = new CountUp("day_num",0,Math.floor(timelong/86400000),0,4);
+                $('.day').html('<span id=dayNum></span>'+'日');
+                var dayMove = new CountUp("dayNum",0,Math.floor(timelong/86400000),0,4);
                 dayMove.start();
 
-                document.getElementById("thistime4").innerHTML="时："+"<span id=hour_num></span>"
-                var hourMove = new CountUp("hour_num",0,Math.floor(timelong/3600000),0,5);
+                $('.hour').html('<span id=hourNum></span>'+'时');
+                var hourMove = new CountUp("hourNum",0,Math.floor(timelong/3600000),0,5);
                 hourMove.start();
 
-                document.getElementById("nexttime0").innerHTML= "还可拥有"
-                document.getElementById("nexttime4").innerHTML="吃饭："+"<span id=meal_num></span>"
-                var mealMove = new CountUp("meal_num",0,life_left*365*3,0,5);
+                $('.eat').html('吃饭：'+'<span id=mealNum></span>');
+                var mealMove = new CountUp("mealNum",0,lifeLeft*365*3,0,5);
                 mealMove.start();
 
-                document.getElementById("nexttime1").innerHTML="长假："+"<span id=voc_num></span>"
-                var vocMove = new CountUp("voc_num",0,life_left*3,0,2);
+                $('.holiday').html('长假：'+'<span id=vocNum></span>');
+                var vocMove = new CountUp("vocNum",0,lifeLeft*3,0,2);
                 vocMove.start();
 
-                document.getElementById("nexttime3").innerHTML="做爱："+"<span id=ml_num></span>"
-                var mlMove = new CountUp("ml_num",0,life_left*56,0,3);
+                $('.ml').html('做爱：'+'<span id=mlNum></span>');
+                var mlMove = new CountUp("mlNum",0,lifeLeft*56,0,3);
                 mlMove.start();
 
-                document.getElementById("nexttime2").innerHTML="周末："+"<span id=week_num></span>"
-                var weekMove = new CountUp("week_num",0,life_left*53,0,3);
+                $('.weekend').html('周末：'+'<span id=weekNum></span>');
+                var weekMove = new CountUp("weekNum",0,lifeLeft*53,0,3);
                 weekMove.start();
+            })
 
-                // document.getElementById("thistime3").innerHTML="分："+Math.floor(timelong/60000);
-                // document.getElementById("thistime4").innerHTML="小时："+Math.floor(timelong/3600000);
-                // document.getElementById("thistime5").innerHTML="天："+Math.floor(timelong/86400000);
-                // document.getElementById("thistime6").innerHTML="周："+Math.floor(timelong/604800000);
-                // document.getElementById("thistime7").innerHTML="月："+Math.floor(year*12);
-
-                // setInterval(function() {
-                //  var now = Date.now();
-                //  var timelong = now - timems;
-                //  var year = timelong/(365*86400000);
-                //  document.getElementById("thistime8").innerHTML="年："+year;
-                // },1000)
-
-                // var oldtime = now;
-                // var demo1 = new CountUp("thistime1", 0, oldtime, 0, 5);
-                // demo1.start();
-                // setInterval(function() {
-                //  var newtime = Date.now();
-                //  var demo1 = new CountUp("thistime1", 0, newtime, 0, 5000);
-                //  demo1.start();
-                //  oldtime = newtime;
-                // },10000000);
-            //var demo = new CountUp("thistime5", 0, day, 0, 1);
-            //demo.start();
-
-            }
-        }
+        })
     </script>
 </body>
 </html>
