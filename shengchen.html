@@ -156,10 +156,11 @@
             background-color: #ddd;
             border-radius: 50%;
         }
+
         header {
             position: relative;
             width: 100%;
-            max-width: 1200px;
+            max-width: 760px;
             margin: 0 auto;
         }
         header h1 {
@@ -201,6 +202,11 @@
             border-radius: 4px;
             text-decoration: none;
 
+        }
+        main {
+            max-width: 760px;
+            width: 100%;
+            margin: 0 auto;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
@@ -537,51 +543,55 @@
                 $live = $('.live-result'),
                 $die = $('.die-result');
             $btn.on('click',function() {
-                var
-                    $time = $('#iptVal').val(),
-                    myTime = new Date($time),
-                    times = myTime.getTime(),
-                    now = Date.now(),
-                    timelong = now-times,
-                    year = timelong/(365*86400000),
-                    day = timelong/(24*3600000),
-                    lifeLeft = 75 - year;
-                $live.show();
-                $die.show();
+                var $time = $('#iptVal').val();
+
                 if (!$time) {
                     $time = '1998-04-01';
+                } else if ($time.match(/^((?:19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/)) {
+                    $live.show();
+                    $die.show();
+                    var myTime = new Date($time),
+                        times = myTime.getTime(),
+                        now = Date.now(),
+                        timelong = now-times,
+                        year = timelong/(365*86400000),
+                        day = timelong/(24*3600000),
+                        lifeLeft = 75 - year;
+                    $('.year').html('<span id=yearNum></span>'+'年');
+                    var yearMove = new CountUp("yearNum",0,year,1,2);
+                    yearMove.start();
+
+                    $('.month').html('<span id=monNum></span>'+'月');
+                    var monMove = new CountUp("monNum",0,year*12,0,3);
+                    monMove.start();
+
+                    $('.day').html('<span id=dayNum></span>'+'日');
+                    var dayMove = new CountUp("dayNum",0,Math.floor(timelong/86400000),0,4);
+                    dayMove.start();
+
+                    $('.hour').html('<span id=hourNum></span>'+'时');
+                    var hourMove = new CountUp("hourNum",0,Math.floor(timelong/3600000),0,5);
+                    hourMove.start();
+
+                    $('.eat').html('吃饭：'+'<span id=mealNum></span>');
+                    var mealMove = new CountUp("mealNum",0,lifeLeft*365*3,0,5);
+                    mealMove.start();
+
+                    $('.holiday').html('长假：'+'<span id=vocNum></span>');
+                    var vocMove = new CountUp("vocNum",0,lifeLeft*3,0,2);
+                    vocMove.start();
+
+                    $('.ml').html('做爱：'+'<span id=mlNum></span>');
+                    var mlMove = new CountUp("mlNum",0,lifeLeft*56,0,3);
+                    mlMove.start();
+
+                    $('.weekend').html('周末：'+'<span id=weekNum></span>');
+                    var weekMove = new CountUp("weekNum",0,lifeLeft*53,0,3);
+                    weekMove.start();
+                } else {
+                    alert('出生日期不能乱写哦，你妈妈知道会生气的')
                 }
-                $('.year').html('<span id=yearNum></span>'+'年');
-                var yearMove = new CountUp("yearNum",0,year,1,2);
-                yearMove.start();
 
-                $('.month').html('<span id=monNum></span>'+'月');
-                var monMove = new CountUp("monNum",0,year*12,0,3);
-                monMove.start();
-
-                $('.day').html('<span id=dayNum></span>'+'日');
-                var dayMove = new CountUp("dayNum",0,Math.floor(timelong/86400000),0,4);
-                dayMove.start();
-
-                $('.hour').html('<span id=hourNum></span>'+'时');
-                var hourMove = new CountUp("hourNum",0,Math.floor(timelong/3600000),0,5);
-                hourMove.start();
-
-                $('.eat').html('吃饭：'+'<span id=mealNum></span>');
-                var mealMove = new CountUp("mealNum",0,lifeLeft*365*3,0,5);
-                mealMove.start();
-
-                $('.holiday').html('长假：'+'<span id=vocNum></span>');
-                var vocMove = new CountUp("vocNum",0,lifeLeft*3,0,2);
-                vocMove.start();
-
-                $('.ml').html('做爱：'+'<span id=mlNum></span>');
-                var mlMove = new CountUp("mlNum",0,lifeLeft*56,0,3);
-                mlMove.start();
-
-                $('.weekend').html('周末：'+'<span id=weekNum></span>');
-                var weekMove = new CountUp("weekNum",0,lifeLeft*53,0,3);
-                weekMove.start();
             })
 
         })
