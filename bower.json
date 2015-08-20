@@ -1,0 +1,17 @@
+{
+  "name": "ShengChen",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dyygtfx/ShengChen",
+  "authors": [
+    "Go7hic <gtfx0209@qq.com>"
+  ],
+  "description": "生辰",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
