@@ -208,7 +208,6 @@
 header {
   position: relative;
   width: 100%;
-  max-width: 760px;
   margin: 0 auto;
 }
 
@@ -256,8 +255,12 @@ header #poetry {
 }
 
 main {
-  max-width: 760px;
   width: 100%;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 760px;
   margin: 0 auto;
 }
 
@@ -319,4 +322,12 @@ main {
 }
 .live-result .live, .die-result .live {
   background: green;
+}
+
+footer.container {
+  margin-top: 20px;
+  text-align: center;
+}
+footer.container span {
+  text-align: center;
 }
