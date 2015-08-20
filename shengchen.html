@@ -43,26 +43,26 @@
                 <a href="javascript:void(0)" id="btn">查看结果</a>
             </div>
         </section>
-        <section class="live-result" style="display: none;">
+        <section class="live-result hide">
             <h4>已经度过</h4>
             <div class="year"></div>
             <div class="month"></div>
             <div class="day"></div>
             <div class="hour"></div>
-            <div class="minute"></div>
-            <div class="seconds"></div>
+          <!--   <div class="minute"></div>
+            <div class="seconds"></div> -->
             <div class="die">
-                <a href="" class="btn"> 死之钟</a>
+                <a href="javascript:void(0);" class="btn"> 死之钟</a>
             </div>
         </section>
-        <section class="die-result" style="display:none;">
+        <section class="die-result hide">
         <h4>还可拥有</h4>
             <div class="ml"></div>
             <div class="weekend"></div>
             <div class="holiday"></div>
             <div class="eat"></div>
             <div class="live">
-                <a href="" class="btn">生之时</a>
+                <a href="javascript:void(0);" class="btn">生之时</a>
             </div>
         </section>
     </main>
@@ -334,8 +334,6 @@
             var random = parseInt(Math.random()*21);
             $('#poetry').html(poem[random]);
 
-
-
             var $btn = $('#btn'),
                 $live = $('.live-result'),
                 $die = $('.die-result');
@@ -345,8 +343,8 @@
                 if (!$time) {
                     $time = '1998-04-01';
                 } else if ($time.match(/^((?:19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/)) {
-                    $live.show();
-                    $die.show();
+                    $live.removeClass('hide');
+                    // $die.show();
                     var myTime = new Date($time),
                         times = myTime.getTime(),
                         now = Date.now(),
@@ -389,6 +387,15 @@
                     alert('出生日期不能乱写哦，你妈妈知道会生气的')
                 }
 
+            })
+            $('.die .btn').on('click',function () {
+
+                $live.addClass('hide');
+                $die.removeClass('hide');
+            })
+            $('.live .btn').on('click',function () {
+                $die.addClass('hide');
+                $live.removeClass('hide')
             })
 
         })

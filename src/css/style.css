@@ -260,3 +260,63 @@ main {
   width: 100%;
   margin: 0 auto;
 }
+
+.hide {
+  display: none;
+}
+
+.live-result h4, .die-result h4 {
+  font-size: 1.8rem;
+  margin: 15px 0;
+  text-align: center;
+}
+.live-result > div, .die-result > div {
+  display: inline-block;
+  width: 24%;
+  text-align: center;
+  height: 175px;
+  line-height: 175px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+}
+.live-result .year, .die-result .year {
+  background: red;
+}
+.live-result .month, .die-result .month {
+  background: blue;
+}
+.live-result .day, .die-result .day {
+  background: green;
+}
+.live-result .hour, .die-result .hour {
+  background: pink;
+}
+.live-result .die, .live-result .live, .die-result .die, .die-result .live {
+  display: block;
+  margin: 20px auto 0;
+  background-color: #3c5555;
+  border-radius: 5px;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+}
+.live-result .die a, .live-result .live a, .die-result .die a, .die-result .live a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+}
+.live-result .ml, .die-result .ml {
+  background: #f00;
+}
+.live-result .weekend, .die-result .weekend {
+  background: #c00;
+}
+.live-result .holiday, .die-result .holiday {
+  background: #edd;
+}
+.live-result .eat, .die-result .eat {
+  background: #35ccc4;
+}
+.live-result .live, .die-result .live {
+  background: green;
+}
