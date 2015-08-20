@@ -29,12 +29,12 @@ return sass('src/sass/style.scss', { style: 'expanded' })
 
 // Scripts
 gulp.task('scripts', function() {
-  return gulp.src('src/js')
+  return gulp.src('component/*.js')
     // 可以是数组
     // .pipe(jshint('.jshintrc'))
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
-    .pipe(concat('quicloud.js'))
+    .pipe(concat('fuck.js'))
     .pipe(gulp.dest('src/js'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
