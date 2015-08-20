@@ -18,9 +18,9 @@ var gulp = require('gulp'),
 
 // Sass
 gulp.task('styles', function() {
-return sass('src/sass/main.scss', { style: 'expanded' })
+return sass('src/sass/style.scss', { style: 'expanded' })
     .pipe(autoprefixer('last 2 version'))
-    .pipe(gulp.dest('dist/styles'))
+    .pipe(gulp.dest('src/css'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(minifycss())
     .pipe(gulp.dest('src/css'))
