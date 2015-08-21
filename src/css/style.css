@@ -246,7 +246,7 @@ header #poetry {
 
 .input a {
   padding: 14px 10px;
-  background: #43ecc5;
+  background: #1EE216;
   color: #fff;
   font-size: 14px;
   line-height: 25px;
@@ -281,18 +281,19 @@ main {
   line-height: 175px;
   border-radius: 50%;
   font-size: 1.5rem;
+  color: #fff;
 }
 .live-result .year, .die-result .year {
-  background: red;
+  background: #FF008E;
 }
 .live-result .month, .die-result .month {
-  background: blue;
+  background: rgba(32, 110, 222, 0.93);
 }
 .live-result .day, .die-result .day {
-  background: green;
+  background: #2ED62E;
 }
 .live-result .hour, .die-result .hour {
-  background: pink;
+  background: #D6586E;
 }
 .live-result .die, .live-result .live, .die-result .die, .die-result .live {
   display: block;
@@ -309,13 +310,13 @@ main {
   text-decoration: none;
 }
 .live-result .ml, .die-result .ml {
-  background: #f00;
+  background: #2EE873;
 }
 .live-result .weekend, .die-result .weekend {
   background: #c00;
 }
 .live-result .holiday, .die-result .holiday {
-  background: #edd;
+  background: #CC7BE8;
 }
 .live-result .eat, .die-result .eat {
   background: #35ccc4;

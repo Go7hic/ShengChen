@@ -188,7 +188,7 @@ header #poetry {
 }
 .input a {
     padding: 14px 10px;
-    background: #43ecc5;
+    background: #1EE216;
     color: #fff;
     font-size: 14px;
     line-height: 25px;
@@ -222,18 +222,19 @@ main {
         line-height: 175px;
         border-radius: 50%;
         font-size: 1.5rem;
+        color: #fff;
     }
     .year {
-        background: red;
+        background: #FF008E;
     }
     .month {
-        background: blue;
+        background: rgba(32, 110, 222, 0.93);
     }
     .day {
-        background: green;
+        background: #2ED62E;
     }
     .hour {
-        background: pink;
+        background: #D6586E;
     }
     .die,.live {
         display: block;
@@ -252,13 +253,13 @@ main {
 
     }
     .ml {
-        background: #f00;
+        background: #2EE873;
     }
     .weekend {
         background: #c00;
     }
     .holiday {
-        background: #edd;
+        background: #CC7BE8;
     }
     .eat {
         background: #35ccc4;
