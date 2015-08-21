@@ -1,3 +1,8 @@
+body {
+  font-size: 12px;
+  font-family: Lora, Georgia, 'Xin Gothic', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
+}
+
 .clock-wrapper {
   position: absolute;
   top: 20px;
@@ -272,6 +277,7 @@ main {
   font-size: 1.8rem;
   margin: 15px 0;
   text-align: center;
+  color: #666;
 }
 .live-result > div, .die-result > div {
   display: inline-block;

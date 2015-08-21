@@ -58,19 +58,19 @@
                 var hourMove = new CountUp("hourNum",0,Math.floor(timelong/3600000),0,5);
                 hourMove.start();
 
-                $('.eat').html('吃饭：'+'<span id=mealNum></span>');
+                $('.eat').html('吃'+'<span id=mealNum></span>'+'顿饭');
                 var mealMove = new CountUp("mealNum",0,lifeLeft*365*3,0,5);
                 mealMove.start();
 
-                $('.holiday').html('长假：'+'<span id=vocNum></span>');
+                $('.holiday').html('享受'+'<span id=vocNum></span>'+'个长假');
                 var vocMove = new CountUp("vocNum",0,lifeLeft*3,0,2);
                 vocMove.start();
 
-                $('.ml').html('做爱：'+'<span id=mlNum></span>');
+                $('.ml').html('做'+'<span id=mlNum></span>'+'次爱');
                 var mlMove = new CountUp("mlNum",0,lifeLeft*56,0,3);
                 mlMove.start();
 
-                $('.weekend').html('周末：'+'<span id=weekNum></span>');
+                $('.weekend').html('过'+'<span id=weekNum></span>'+'次周末');
                 var weekMove = new CountUp("weekNum",0,lifeLeft*53,0,3);
                 weekMove.start();
             } else {
