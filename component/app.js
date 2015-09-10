@@ -87,5 +87,37 @@
             $die.addClass('hide');
             $live.removeClass('hide');
         });
+        // 各种浏览器兼容，监听浏览器窗口是否可见
+        var hidden, state, visibilityChange;
+        if (typeof document.hidden !== "undefined") {
+            hidden = "hidden";
+            visibilityChange = "visibilitychange";
+            state = "visibilityState";
+        } else if (typeof document.mozHidden !== "undefined") {
+            hidden = "mozHidden";
+            visibilityChange = "mozvisibilitychange";
+            state = "mozVisibilityState";
+        } else if (typeof document.msHidden !== "undefined") {
+            hidden = "msHidden";
+            visibilityChange = "msvisibilitychange";
+            state = "msVisibilityState";
+        } else if (typeof document.webkitHidden !== "undefined") {
+            hidden = "webkitHidden";
+            visibilityChange = "webkitvisibilitychange";
+            state = "webkitVisibilityState";
+        }
+
+        // 添加监听器，在title里显示状态变化
+        document.addEventListener(visibilityChange, function() {
+            if (document[state] === 'hidden') {
+                document.title = '记得回来看你还能活多久！';
+            } else {
+                document.title = 'Web 版生辰';
+            }
+
+        }, false);
+
+        // 初始化
+        document.title = 'Web 版生辰';
 
     });
