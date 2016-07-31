@@ -1,5 +1,5 @@
 # ShengChen
 Web 版生辰
 
-demo: http://blog.yongyuan.us/ShengChen/
+demo: http://dyygtfx.github.io/ShengChen/
 
